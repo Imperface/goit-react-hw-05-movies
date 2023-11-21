@@ -1,6 +1,6 @@
 import { statuses, API_KEY } from 'constants';
 import { useEffect, useState } from 'react';
-import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
+import { NavLink, Outlet, useParams } from 'react-router-dom';
 import { Section } from 'components';
 import axios from 'axios';
 import {
