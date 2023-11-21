@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 export const ReviewsList = styled.ul`
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
   row-gap: ${props => props.theme.spacing(5)};

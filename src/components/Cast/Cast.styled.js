@@ -3,11 +3,12 @@ export const CastList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 0;
   row-gap: ${props => props.theme.spacing(6)};
   column-gap: ${props => props.theme.spacing(5)};
 `;
 export const CastItem = styled.li`
-  width: 350px;
+  width: 30%;
   height: 500px;
   padding: ${props => props.theme.spacing(5)};
   background-color: ${props => props.theme.colors.cardBg};

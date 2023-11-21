@@ -5,8 +5,8 @@ import { Section } from 'components';
 import axios from 'axios';
 import {
   MovieAdditionInfo,
+  MovieInfoGanres,
   MovieInfoWrapper,
-  MoviePoster,
   MovieWrapper,
 } from './MovieDetails.styled';
 
@@ -27,8 +27,6 @@ export const MovieDetails = () => {
         };
         setStatus(statuses.PENDING);
         const { data } = await axios.request(options);
-
-        // set data of selected movie
         setMovieData(data);
         setStatus(statuses.RESOLVED);
       } catch (error) {
@@ -52,9 +50,10 @@ export const MovieDetails = () => {
       <>
         <Section>
           <MovieWrapper>
-            <MoviePoster
+            <img
               src={`https://image.tmdb.org/t/p/w500${poster_path}`}
               alt={`poster for the movie ${title}`}
+              loading="lazy"
             />
             <MovieInfoWrapper>
               <h2>{`${title} (${release_date})`}</h2>
@@ -68,24 +67,33 @@ export const MovieDetails = () => {
                 </p>
                 <p>{`${overview}`}</p>
               </div>
-              <div>
+              <MovieInfoGanres>
                 <p>
                   <b>Genres:</b>
                 </p>
-                {genres.map(({ name, id }) => (
-                  <span key={id}>{name}</span>
-                ))}
-              </div>
+                <div>
+                  {genres.map(({ name, id }) => (
+                    <span key={id}>{name}</span>
+                  ))}
+                </div>
+              </MovieInfoGanres>
             </MovieInfoWrapper>
           </MovieWrapper>
         </Section>
 
         <Section>
           <MovieAdditionInfo>
-            <NavLink to="cast">Cast</NavLink>
-            <NavLink to="reviews">Reviews</NavLink>
+            <ul>
+              <li>
+                <NavLink to="cast">Cast</NavLink>
+              </li>
+              <li>
+                <NavLink to="reviews">Reviews</NavLink>
+              </li>
+            </ul>
           </MovieAdditionInfo>
         </Section>
+
         <Outlet />
       </>
     );

@@ -1,10 +1,9 @@
-import { Section } from 'components';
+import { MovieList, Section } from 'components';
 import { useEffect, useState } from 'react';
 import { statuses, API_KEY } from 'constants';
 import axios from 'axios';
-import { FilmList } from 'components/FilmList/FilmList';
 export const Home = () => {
-  const [films, setFilms] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState(statuses.IDLE);
   useEffect(() => {
     const fetchMovies = async query => {
@@ -21,7 +20,7 @@ export const Home = () => {
         const {
           data: { results },
         } = await axios.request(options);
-        setFilms(results);
+        setMovies(results);
         setStatus(statuses.RESOLVED);
       } catch (error) {
         setStatus(statuses.REJECTED);
@@ -33,14 +32,14 @@ export const Home = () => {
   if (status === statuses.PENDING) {
     return (
       <Section>
-        <p>Loading tranding films</p>
+        <p>Loading tranding movies</p>
       </Section>
     );
   }
   if (status === statuses.RESOLVED) {
     return (
       <Section title="The list of trending movies">
-        <FilmList films={films} />
+        <MovieList movies={movies} />
       </Section>
     );
   }

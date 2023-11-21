@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
 
 export const SectionWrapper = styled.section`
-  max-width: 800px;
-  padding: ${props => props.theme.spacing(6)};
+  padding: ${props => props.theme.spacing(6)} 0;
   margin: 0 auto;
 `;
 

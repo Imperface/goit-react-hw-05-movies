@@ -24,8 +24,6 @@ export const Reviews = () => {
         const {
           data: { results },
         } = await axios.request(options);
-        console.log(results);
-        // set data of selected movie
         setMovieReviewsData(results);
         setStatus(statuses.RESOLVED);
       } catch (error) {

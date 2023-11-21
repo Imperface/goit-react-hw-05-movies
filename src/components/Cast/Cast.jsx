@@ -23,8 +23,6 @@ export const Cast = () => {
         const {
           data: { cast },
         } = await axios.request(options);
-        console.log(cast);
-        // set data of selected movie
         setMovieCastData(cast);
         setStatus(statuses.RESOLVED);
       } catch (error) {
@@ -32,7 +30,7 @@ export const Cast = () => {
       }
     };
     fetchMovieCast();
-  }, [setMovieCastData, movieId]);
+  }, [movieId]);
 
   if (status === statuses.PENDING) {
     return (
@@ -45,17 +43,18 @@ export const Cast = () => {
     return (
       <Section>
         <CastList>
-          {movieCastData.map(item => (
-            <CastItem key={item.cast_id}>
-              {item.profile_path && (
+          {movieCastData.map(({ profile_path, name, character, cast_id }) => (
+            <CastItem key={cast_id}>
+              {profile_path && (
                 <CastProfileImg
-                  src={`https://image.tmdb.org/t/p/w500${item.profile_path}`}
-                  alt=""
+                  src={`https://image.tmdb.org/t/p/w500${profile_path}`}
+                  alt={name}
+                  loading="lazy"
                 />
               )}
               <div>
-                <p>{`Name: ${item.name}`}</p>
-                <p>{`Character: ${item.character}`}</p>
+                <p>{`Name: ${name}`}</p>
+                <p>{`Character: ${character}`}</p>
               </div>
             </CastItem>
           ))}

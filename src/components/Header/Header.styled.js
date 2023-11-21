@@ -1,29 +1,10 @@
 import styled from '@emotion/styled';
-export const MovieWrapper = styled.div`
-  display: flex;
-  & img {
-    width: 100%;
-    height: 100%;
-    max-width: 400px;
-  }
-`;
 
-export const MovieInfoWrapper = styled.div`
-  text-align: left;
-  max-width: 500px;
-  padding-left: ${props => props.theme.spacing(5)};
-  margin-left: auto;
-  display: flex;
-  flex-direction: column;
-  row-gap: ${props => props.theme.spacing(5)};
-`;
-export const MovieInfoGanres = styled.div`
-  & div {
-    display: flex;
-    column-gap: ${props => props.theme.spacing(5)};
-  }
-`;
-export const MovieAdditionInfo = styled.div`
+export const HeaderWrapper = styled.header`
+  background-color: ${props => props.theme.colors.backgroundSecondary};
+  padding-top: ${props => props.theme.spacing(5)};
+  padding-bottom: ${props => props.theme.spacing(5)};
+
   & ul {
     display: flex;
     column-gap: 10px;

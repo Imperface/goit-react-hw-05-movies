@@ -1,7 +1,10 @@
+import { Container } from 'components';
 import { SectionWrapper, SectionTitle } from './Section.styled';
 export const Section = ({ title = null, children }) => (
   <SectionWrapper>
-    {title && <SectionTitle>{title}</SectionTitle>}
-    {children}
+    <Container>
+      {title && <SectionTitle>{title}</SectionTitle>}
+      {children}
+    </Container>
   </SectionWrapper>
 );
