@@ -1,28 +1,40 @@
-import { MovieList, Section } from 'components';
+import { Error, Loader, MovieList, Section } from 'components';
 import { useEffect, useState } from 'react';
 import { statuses, API_KEY } from 'constants';
 import axios from 'axios';
+
 export const Home = () => {
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState(statuses.IDLE);
+
   useEffect(() => {
-    const fetchMovies = async query => {
+    const fetchMovies = async () => {
       try {
+        // create request options
         const options = {
-          method: 'GET',
-          url: 'https://api.themoviedb.org/3/trending/movie/day',
           params: { language: 'en-US', api_key: API_KEY },
           headers: {
             accept: 'application/json',
           },
         };
+
+        // set status pendind, render spiner
         setStatus(statuses.PENDING);
-        const {
-          data: { results },
-        } = await axios.request(options);
+        const endpoint = 'https://api.themoviedb.org/3/trending/movie/day';
+
+        // const { data: {results} } = await axios.get(endpoint, options);
+
+        // get data by request, destruct
+        const { data } = await axios.get(endpoint, options);
+        const { results } = data;
+
+        // set data to state
         setMovies(results);
+
+        // set status resolved, unmount spiner, mount page
         setStatus(statuses.RESOLVED);
       } catch (error) {
+        // mount error block
         setStatus(statuses.REJECTED);
       }
     };
@@ -30,24 +42,18 @@ export const Home = () => {
   }, []);
 
   if (status === statuses.PENDING) {
-    return (
-      <Section>
-        <p>Loading tranding movies</p>
-      </Section>
-    );
+    return <Loader />;
   }
+
   if (status === statuses.RESOLVED) {
     return (
-      <Section title="The list of trending movies">
+      <Section title="The list of trending movies today:">
         <MovieList movies={movies} />
       </Section>
     );
   }
+
   if (status === statuses.REJECTED) {
-    return (
-      <Section>
-        <p>Somethink went wrong.</p>
-      </Section>
-    );
+    return <Error />;
   }
 };

@@ -1,7 +1,14 @@
 import { statuses, API_KEY } from 'constants';
-import { useEffect, useState } from 'react';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
-import { Section } from 'components';
+import { useEffect, useRef, useState } from 'react';
+import {
+  Link,
+  NavLink,
+  Route,
+  Routes,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
+import { Cast, Error, Loader, Reviews, Section } from 'components';
 import axios from 'axios';
 import {
   MovieAdditionInfo,
@@ -14,6 +21,10 @@ export const MovieDetails = () => {
   const { movieId } = useParams();
   const [status, setStatus] = useState(statuses.IDLE);
   const [movieData, setMovieData] = useState(null);
+  const location = useLocation();
+  console.log(location);
+  const backLinkLocationRef = useRef(location.state?.from ?? '/');
+  console.log(backLinkLocationRef);
   useEffect(() => {
     const fetchMovie = async () => {
       try {
@@ -37,18 +48,16 @@ export const MovieDetails = () => {
   }, [movieId]);
 
   if (status === statuses.PENDING) {
-    return (
-      <Section>
-        <p>Loading information of the selected movie.</p>
-      </Section>
-    );
+    return <Loader />;
   }
+
   if (status === statuses.RESOLVED) {
     const { poster_path, title, overview, genres, release_date, vote_average } =
       movieData;
     return (
       <>
         <Section>
+          <Link to={backLinkLocationRef.current}>Go Back</Link>
           <MovieWrapper>
             <img
               src={`https://image.tmdb.org/t/p/w500${poster_path}`}
@@ -94,15 +103,14 @@ export const MovieDetails = () => {
           </MovieAdditionInfo>
         </Section>
 
-        <Outlet />
+        <Routes>
+          <Route path="reviews/" element={<Reviews />} />
+          <Route path="cast/" element={<Cast />} />
+        </Routes>
       </>
     );
   }
   if (status === statuses.REJECTED) {
-    return (
-      <Section>
-        <p>Somethink went wrong.</p>
-      </Section>
-    );
+    return <Error />;
   }
 };

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Section } from 'components';
+import { Error, Loader, NoResult, Section } from 'components';
 import { statuses, API_KEY } from 'constants';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -34,11 +34,7 @@ export const Reviews = () => {
   }, [setMovieReviewsData, movieId]);
 
   if (status === statuses.PENDING) {
-    return (
-      <Section>
-        <p>Loading reviews of the selected movie.</p>
-      </Section>
-    );
+    return <Loader />;
   }
   if (status === statuses.RESOLVED) {
     return (
@@ -55,7 +51,7 @@ export const Reviews = () => {
             ))
           ) : (
             <ReviewsItem>
-              <NoReviews>Sorry. There are no reviews.</NoReviews>
+              <NoResult text="Sorry. There are no reviews." />
             </ReviewsItem>
           )}
         </ReviewsList>
@@ -64,10 +60,6 @@ export const Reviews = () => {
   }
 
   if (status === statuses.REJECTED) {
-    return (
-      <Section>
-        <p>Somethink went wrong.</p>
-      </Section>
-    );
+    return <Error />;
   }
 };

@@ -9,3 +9,6 @@ export { MovieDetails } from './MovieDetails/MovieDetails';
 export { Cast } from './Cast/Cast';
 export { Reviews } from './Reviews/Reviews';
 export { NotFound } from './NotFound/NotFound';
+export { Error } from './Error/Error';
+export { Loader } from './Loader/Loader';
+export { NoResult } from './NoResult/NoResult';
