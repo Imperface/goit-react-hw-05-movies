@@ -12,6 +12,3 @@ export const ReviewsItem = styled.li`
   border-radius: 20px;
   background-color: ${props => props.theme.colors.cardBg};
 `;
-export const NoReviews = styled.p`
-  text-align: center;
-`;

@@ -3,7 +3,7 @@ import { Error, Loader, NoResult, Section } from 'components';
 import { statuses, API_KEY } from 'constants';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { NoReviews, ReviewsItem, ReviewsList } from './Reviews.styled';
+import {  ReviewsItem, ReviewsList } from './Reviews.styled';
 
 export const Reviews = () => {
   const { movieId } = useParams();
