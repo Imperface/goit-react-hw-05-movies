@@ -4,7 +4,7 @@ import { statuses, API_KEY } from 'constants';
 import axios from 'axios';
 import { Error, Loader, NoResult, Section } from 'components';
 import { CastItem, CastList, CastProfileImg } from './Cast.styled';
-export const Cast = () => {
+const Cast = () => {
   const { movieId } = useParams();
   const [movieCastData, setMovieCastData] = useState(null);
   const [status, setStatus] = useState(statuses.IDLE);
@@ -69,3 +69,4 @@ export const Cast = () => {
     return <Error />;
   }
 };
+export default Cast;

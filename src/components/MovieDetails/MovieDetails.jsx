@@ -1,5 +1,5 @@
 import { statuses, API_KEY } from 'constants';
-import { useEffect, useRef, useState } from 'react';
+import { lazy, useEffect, useRef, useState } from 'react';
 import {
   Link,
   NavLink,
@@ -8,7 +8,7 @@ import {
   useLocation,
   useParams,
 } from 'react-router-dom';
-import { Cast, Error, Loader, Reviews, Section } from 'components';
+import { Error, Loader, Section } from 'components';
 import axios from 'axios';
 import {
   MovieAdditionInfo,
@@ -16,10 +16,13 @@ import {
   MovieInfoWrapper,
   MovieWrapper,
 } from './MovieDetails.styled';
-
 import { format } from 'date-fns';
 
-export const MovieDetails = () => {
+// lazy import
+const Cast = lazy(() => import('components/Cast/Cast'));
+const Reviews = lazy(() => import('components/Reviews/Reviews'));
+
+const MovieDetails = () => {
   const { movieId } = useParams();
   const [status, setStatus] = useState(statuses.IDLE);
   const [movieData, setMovieData] = useState(null);
@@ -114,3 +117,4 @@ export const MovieDetails = () => {
     return <Error />;
   }
 };
+export default MovieDetails;

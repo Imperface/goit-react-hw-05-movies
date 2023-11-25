@@ -1,6 +1,5 @@
 import { Layout, NotFound } from 'components';
 // import { Home, Movies } from 'pages';
-import { MovieDetails } from 'components';
 import { Route, Routes } from 'react-router-dom';
 import { AppContainer } from './App.styled';
 import { lazy } from 'react';
@@ -8,6 +7,7 @@ import { lazy } from 'react';
 // lazy import
 const Home = lazy(() => import('pages/Home'));
 const Movies = lazy(() => import('pages/Movies'));
+const MovieDetails = lazy(() => import('components/MovieDetails/MovieDetails'));
 
 // ? Layout - wrapper, create basic structure
 // ? path= "*" - page for wrong path, return to "/"
