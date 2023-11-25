@@ -17,14 +17,14 @@ import {
   MovieWrapper,
 } from './MovieDetails.styled';
 
+import { format } from 'date-fns';
+
 export const MovieDetails = () => {
   const { movieId } = useParams();
   const [status, setStatus] = useState(statuses.IDLE);
   const [movieData, setMovieData] = useState(null);
   const location = useLocation();
-  console.log(location);
   const backLinkLocationRef = useRef(location.state?.from ?? '/');
-  console.log(backLinkLocationRef);
   useEffect(() => {
     const fetchMovie = async () => {
       try {
@@ -65,7 +65,7 @@ export const MovieDetails = () => {
               loading="lazy"
             />
             <MovieInfoWrapper>
-              <h2>{`${title} (${release_date})`}</h2>
+              <h2>{`${title} (${format(new Date(release_date), 'yyyy')})`}</h2>
               <p>
                 <b>Vote average: </b>
                 {`${Math.floor(vote_average * 10)}%`}

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { statuses, API_KEY } from 'constants';
 import axios from 'axios';
 
-export const Home = () => {
+const Home = () => {
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState(statuses.IDLE);
 
@@ -57,3 +57,4 @@ export const Home = () => {
     return <Error />;
   }
 };
+export default Home;

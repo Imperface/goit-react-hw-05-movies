@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { API_KEY } from 'constants';
 import { useSearchParams } from 'react-router-dom';
 
-export const Movies = () => {
+const Movies = () => {
   const [movieData, setMovieData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -19,6 +19,7 @@ export const Movies = () => {
     if (!query) {
       return;
     }
+
     const fetchMovie = async () => {
       try {
         // create request options
@@ -69,7 +70,11 @@ export const Movies = () => {
       <Section>
         <MovieSearchFormWrapper>
           <form onSubmit={onSearchFormSubmit}>
-            <input name="movieSearch" placeholder="Search movie" />
+            <input
+              name="movieSearch"
+              placeholder="Search movie"
+              defaultValue={query ?? ''}
+            />
             <button type="submit">Search</button>
           </form>
         </MovieSearchFormWrapper>
@@ -91,3 +96,5 @@ export const Movies = () => {
     </>
   );
 };
+
+export default Movies;
