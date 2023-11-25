@@ -1,5 +1,5 @@
 import { statuses, API_KEY } from 'constants';
-import { lazy, useEffect, useRef, useState } from 'react';
+import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import {
   Link,
   NavLink,
@@ -106,10 +106,12 @@ const MovieDetails = () => {
           </MovieAdditionInfo>
         </Section>
 
-        <Routes>
-          <Route path="reviews/" element={<Reviews />} />
-          <Route path="cast/" element={<Cast />} />
-        </Routes>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="reviews/" element={<Reviews />} />
+            <Route path="cast/" element={<Cast />} />
+          </Routes>
+        </Suspense>
       </>
     );
   }
