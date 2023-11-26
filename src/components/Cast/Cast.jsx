@@ -46,7 +46,6 @@ const Cast = () => {
                   <CastProfileImg
                     src={`https://image.tmdb.org/t/p/w500${profile_path}`}
                     alt={name}
-                    loading="lazy"
                   />
                 )}
                 <div>

@@ -65,7 +65,6 @@ const MovieDetails = () => {
             <img
               src={`https://image.tmdb.org/t/p/w500${poster_path}`}
               alt={`poster for the movie ${title}`}
-              loading="lazy"
             />
             <MovieInfoWrapper>
               <h2>{`${title} (${format(new Date(release_date), 'yyyy')})`}</h2>
